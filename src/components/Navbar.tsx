@@ -148,7 +148,6 @@
 
 // export default Navbar;
 
-
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -174,12 +173,14 @@ const Navbar = () => {
   /* ---------------- Body Scroll Lock ---------------- */
   useEffect(() => {
     document.body.style.overflow = isMobileMenuOpen ? 'hidden' : 'auto';
-    return () => (document.body.style.overflow = 'auto');
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
   }, [isMobileMenuOpen]);
 
-  /* ---------------- ESC Close ---------------- */
+  /* ---------------- ESC Key Close ---------------- */
   useEffect(() => {
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setIsMobileMenuOpen(false);
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -196,10 +197,10 @@ const Navbar = () => {
   ];
 
   /* ---------------- Link Renderer ---------------- */
-  const renderLink = (link, onClick) => {
+  const renderLink = (link: { name: string; href: string }, onClick?: () => void) => {
     const isActive =
       location.pathname === link.href ||
-      (isHomePage && link.href.startsWith('#'));
+      (isHomePage && link.href === '#home');
 
     const classes = `nav-link text-base lg:text-lg font-medium ${
       isActive ? 'active' : ''
@@ -245,12 +246,16 @@ const Navbar = () => {
             {/* Logo */}
             <Link
               to="/"
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
               className="font-heading text-3xl lg:text-4xl font-bold gradient-text"
             >
               AK
             </Link>
 
-            {/* Desktop Nav */}
+            {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-8">
               {navLinks.map((link) => renderLink(link))}
             </div>
@@ -263,12 +268,12 @@ const Navbar = () => {
               </Button>
             </div>
 
-            {/* Mobile Button */}
+            {/* Mobile Menu Button */}
             <div className="lg:hidden flex items-center gap-3">
               <ThemeToggle />
               <button
                 aria-label="Toggle navigation"
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                onClick={() => setIsMobileMenuOpen((prev) => !prev)}
                 className="text-foreground hover:opacity-80 transition-opacity"
               >
                 {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
