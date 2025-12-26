@@ -1,4 +1,6 @@
 
+'use client';
+
 import {
   ArrowDown,
   Github,
@@ -13,86 +15,116 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="
+        relative 
+        min-h-[100svh] 
+        w-full 
+        overflow-x-hidden 
+        flex 
+        items-center
+        bg-zinc-950 sm:bg-transparent
+      "
     >
-      {/* Backgrounds (non-clickable) */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_hsla(45,100%,50%,0.08)_0%,_transparent_50%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_hsla(25,95%,55%,0.05)_0%,_transparent_50%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_hsla(210,100%,50%,0.03)_0%,_transparent_70%)]" />
+      {/* ================= BACKGROUND GRADIENTS ================= */}
 
-      <div className="container mx-auto px-6 pt-20 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* LEFT */}
-          <div className="space-y-6">
+      {/* Top Gradient */}
+      <div
+        className="
+          pointer-events-none absolute inset-0
+          bg-[radial-gradient(circle_at_top,_hsla(45,100%,50%,0.18)_0%,_transparent_65%)]
+          sm:bg-[radial-gradient(ellipse_at_top_right,_hsla(45,100%,50%,0.08)_0%,_transparent_50%)]
+        "
+      />
+
+      {/* Bottom Gradient */}
+      <div
+        className="
+          pointer-events-none absolute inset-0
+          bg-[radial-gradient(circle_at_bottom,_hsla(25,95%,55%,0.15)_0%,_transparent_65%)]
+          sm:bg-[radial-gradient(ellipse_at_bottom_left,_hsla(25,95%,55%,0.05)_0%,_transparent_50%)]
+        "
+      />
+
+      {/* Center Glow */}
+      <div
+        className="
+          pointer-events-none absolute inset-0
+          bg-[radial-gradient(circle_at_center,_hsla(210,100%,50%,0.1)_0%,_transparent_70%)]
+          sm:bg-[radial-gradient(ellipse_at_center,_hsla(210,100%,50%,0.03)_0%,_transparent_70%)]
+        "
+      />
+
+      {/* ================= CONTENT ================= */}
+
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 pt-24 pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+
+          {/* ================= LEFT CONTENT ================= */}
+          <div className="space-y-6 text-center lg:text-left">
             <span className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium">
               Full Stack Developer & Automation Expert
             </span>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold">
-              Hi, I’m <span className="gradient-text">Akshay Kumbhar</span>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
+              Hi, I’m{' '}
+              <span className="gradient-text">
+                Akshay Kumbhar
+              </span>
             </h1>
 
-            <p className="text-lg md:text-xl text-muted-foreground max-w-xl">
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0">
               Full Stack Developer with 4+ years of experience in scalable web
               applications and automation workflows.
             </p>
 
-            <div className="flex gap-4 pt-4">
+            {/* BUTTONS */}
+            <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start">
               <Button size="lg" asChild>
                 <a href="#projects">View My Work</a>
               </Button>
+
               <Button size="lg" variant="outline" asChild>
                 <a href="#contact">Get In Touch</a>
               </Button>
             </div>
 
             {/* SOCIAL ICONS */}
-            <div className="flex items-center gap-5 pt-6">
-              {/* GitHub */}
-              <a
-                href="https://github.com/AksahyKumbhar"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-14 h-14 rounded-full bg-gradient-to-br from-zinc-900 to-zinc-800 border border-white/10 shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-white/20"
-              >
-                <Github size={22} className="text-white" />
-              </a>
+            <div className="flex gap-4 pt-6 justify-center lg:justify-start">
+              <SocialIcon href="https://github.com/AksahyKumbhar">
+                <Github size={20} />
+              </SocialIcon>
 
-              {/* LinkedIn */}
-              <a
-                href="https://linkedin.com/in/akshay-kumbhar-646484200"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-14 h-14 rounded-full bg-gradient-to-br from-zinc-900 to-zinc-800 border border-white/10 shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-blue-500/40"
-              >
-                <Linkedin size={22} className="text-white" />
-              </a>
+              <SocialIcon href="https://linkedin.com/in/akshay-kumbhar-646484200">
+                <Linkedin size={20} />
+              </SocialIcon>
 
-              {/* YouTube */}
-              <a
-                href="https://www.youtube.com/@AkshayKumbhar-x12-AI"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-14 h-14 rounded-full bg-gradient-to-br from-zinc-900 to-zinc-800 border border-white/10 shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-red-500/40"
-              >
-                <Youtube size={22} className="text-white" />
-              </a>
+              <SocialIcon href="https://www.youtube.com/@AkshayKumbhar-x12-AI">
+                <Youtube size={20} />
+              </SocialIcon>
 
-              {/* ✅ EMAIL — FIXED */}
-              <a
-                href="mailto:akshaykumbhar.work129@gmail.com"
-                className="w-14 h-14 rounded-full bg-gradient-to-br from-zinc-900 to-zinc-800 border border-white/10 shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-primary/40"
-              >
-                <Mail size={22} className="text-white" />
-              </a>
+              <SocialIcon href="mailto:akshaykumbhar.work129@gmail.com">
+                <Mail size={20} />
+              </SocialIcon>
             </div>
           </div>
 
-          {/* RIGHT IMAGE */}
+          {/* ================= RIGHT IMAGE ================= */}
           <div className="flex justify-center lg:justify-end">
-            <div className="relative">
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/30 via-accent/20 to-transparent rounded-full blur-3xl scale-110" />
-              <div className="relative w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-primary/30">
+            <div className="relative max-w-full">
+
+              {/* Image Glow */}
+              <div
+                className="
+                  pointer-events-none absolute inset-0
+                  bg-gradient-to-br from-primary/40 via-accent/30 to-transparent
+                  rounded-full
+                  blur-2xl sm:blur-3xl
+                  scale-105 sm:scale-110
+                "
+              />
+
+              {/* Profile Image */}
+              <div className="relative w-56 h-56 sm:w-72 sm:h-72 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-primary/30 mx-auto">
                 <img
                   src={profilePhoto}
                   alt="Akshay Kumbhar"
@@ -103,8 +135,8 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Scroll */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+        {/* ================= SCROLL INDICATOR ================= */}
+        <div className="hidden sm:block absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
           <a href="#about" className="text-muted-foreground hover:text-primary">
             <ArrowDown size={24} />
           </a>
@@ -115,3 +147,29 @@ const Hero = () => {
 };
 
 export default Hero;
+
+/* ================= SOCIAL ICON ================= */
+const SocialIcon = ({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) => (
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="
+      w-12 h-12 sm:w-14 sm:h-14
+      rounded-full
+      bg-gradient-to-br from-zinc-900 to-zinc-800
+      border border-white/10
+      shadow-xl
+      flex items-center justify-center
+      transition hover:scale-110
+    "
+  >
+    <span className="text-white">{children}</span>
+  </a>
+);
